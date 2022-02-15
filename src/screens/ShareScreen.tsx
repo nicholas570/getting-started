@@ -1,6 +1,4 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { EditScreenInfo } from '../components/EditScreenInfo';
-import { Separator } from '../components/Separator';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,12 +12,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function MainScreen() {
+export const ShareScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <Separator />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <Text style={styles.title}>Share Screen</Text>
     </View>
   );
-}
+};
