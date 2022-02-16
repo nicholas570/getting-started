@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 export const FeedScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Camera Screen</Text>
+      <Text style={styles.title}>Feed Screen</Text>
     </View>
   );
 };
