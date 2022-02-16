@@ -1,4 +1,5 @@
 import { Camera, CameraCapturedPicture } from 'expo-camera';
+import { ImageResult, manipulateAsync } from 'expo-image-manipulator';
 import { useRef, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useCamera } from '../hooks/useCamera';
@@ -26,9 +27,17 @@ export function CameraScreen() {
 
   const cameraRef = useRef<Camera | null>(null);
 
+  const resizePicture = async (uri: string): Promise<ImageResult> => {
+    const result = await manipulateAsync(uri, [{ resize: { width: 800 } }]);
+
+    return result;
+  };
+
   const takePicture = async (): Promise<CameraCapturedPicture | undefined> => {
     const pictureMetadata = await cameraRef?.current?.takePictureAsync();
-    return pictureMetadata;
+    const resizedPicture = await resizePicture(pictureMetadata!.uri);
+
+    return resizedPicture;
   };
 
   if (hasPermission === null) {
