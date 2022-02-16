@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
+import { usePicturesCache } from '../hooks/usePicturesCache';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,9 +14,16 @@ const styles = StyleSheet.create({
 });
 
 export const FeedScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Feed Screen</Text>
-    </View>
-  );
+  const { picturesUri, path } = usePicturesCache();
+
+  return picturesUri.length > 0 ? (
+    <Image
+      style={{
+        flex: 1,
+        resizeMode: 'cover',
+        height: 500
+      }}
+      source={{ uri: `${path}${picturesUri[0]}` }}
+    />
+  ) : null;
 };
