@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from 'react-native';
+import { FlatList, Image, StyleSheet } from 'react-native';
 import { usePicturesCache } from '../hooks/usePicturesCache';
 
 const styles = StyleSheet.create({
@@ -7,23 +7,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold'
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    height: 500
   }
 });
 
 export const FeedScreen = () => {
   const { picturesUri, path } = usePicturesCache();
 
-  return picturesUri.length > 0 ? (
-    <Image
-      style={{
-        flex: 1,
-        resizeMode: 'cover',
-        height: 500
-      }}
-      source={{ uri: `${path}${picturesUri[0]}` }}
-    />
-  ) : null;
+  const renderPictures = ({ item }: { item: string }) => {
+    return <Image style={styles.image} source={{ uri: `${path}${item}` }} />;
+  };
+
+  return picturesUri.length > 0 ? <FlatList data={picturesUri} keyExtractor={(item: string) => item} renderItem={renderPictures} /> : null;
 };
