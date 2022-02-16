@@ -1,7 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 import { useEffect, useState } from 'react';
 
-export const usePicturesCache = (): { picturesUri: string[]; path: string } => {
+export const usePicturesCache = (): { picturesUri: string[] } => {
   const [pictures, setPictures] = useState<Array<string>>([]);
 
   useEffect(() => {
@@ -12,7 +12,6 @@ export const usePicturesCache = (): { picturesUri: string[]; path: string } => {
   }, []);
 
   return {
-    picturesUri: pictures,
-    path: FileSystem.cacheDirectory + 'ImageManipulator/'
+    picturesUri: pictures
   };
 };

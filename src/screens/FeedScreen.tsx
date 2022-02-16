@@ -1,5 +1,5 @@
 import { FlatList, Image, StyleSheet } from 'react-native';
-import { usePicturesCache } from '../hooks/usePicturesCache';
+import { useFeedUrls } from '../hooks/useFeedUrls';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,19 +7,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
   image: {
-    flex: 1,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     height: 500
   }
 });
 
 export const FeedScreen = () => {
-  const { picturesUri, path } = usePicturesCache();
+  const serverImagesUrls = useFeedUrls();
 
   const renderPictures = ({ item }: { item: string }) => {
-    return <Image style={styles.image} source={{ uri: `${path}${item}` }} />;
+    return (
+      <Image
+        style={styles.image}
+        source={{
+          uri: 'https://wildstagram.nausicaa.wilders.dev/files/' + item
+        }}
+      />
+    );
   };
-
-  return picturesUri.length > 0 ? <FlatList data={picturesUri} keyExtractor={(item: string) => item} renderItem={renderPictures} /> : null;
+  return serverImagesUrls.length > 0 ? (
+    <FlatList data={serverImagesUrls} keyExtractor={(serverImageURI) => serverImageURI} renderItem={renderPictures} />
+  ) : null;
 };

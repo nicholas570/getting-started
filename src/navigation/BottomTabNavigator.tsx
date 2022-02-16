@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CameraScreen } from '../screens/CameraScreen';
 import { FeedScreen } from '../screens/FeedScreen';
-import { ShareScreen } from '../screens/ShareScreen';
+import { ImagesScreen } from '../screens/ImagesScreen';
 import { TabBarIcon } from './TabBarIcon';
 
 const Tab = createBottomTabNavigator();
@@ -23,18 +23,18 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="FeedScreen"
-        component={FeedScreen}
+        name="ImagesScreen"
+        component={ImagesScreen}
         options={{
-          title: 'feed',
+          title: 'images',
           tabBarIcon: ({ color }) => <TabBarIcon name="image" color={color} />
         }}
       />
       <Tab.Screen
-        name="ShareScreen"
-        component={ShareScreen}
+        name="FeedScreen"
+        component={FeedScreen}
         options={{
-          title: 'share',
+          title: 'feed',
           tabBarIcon: ({ color }) => <TabBarIcon name="share" color={color} />
         }}
       />
